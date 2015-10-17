@@ -2,7 +2,7 @@
 
 #This script are responsible for manage all other threads, such as MQTT publisher, Sensor Thread, and data sush total volume measured and last flow across the meter.
 
-from HidroMeter import HidroMeter
+from HydroMeter import HydroMeter
 from Sensor_Th import Sensor_Th
 from threading import Semaphore
 from SocketHandlers.SocketsPoll import SocketsPoll
@@ -22,7 +22,7 @@ def printMenu():
     conLock.release()
 
 
-YF_S201 = HidroMeter(spinFactor=4.5, minFlow=1, maxFlow=30)
+YF_S201 = HydroMeter(spinFactor=4.5, minFlow=1, maxFlow=30)
 
 FlowSensor_Th = Sensor_Th(threadID=1, name="SensorThread", consoleLock=conLock, appFlags=flags, logFlag=False)
 FlowSensor_Th.start()

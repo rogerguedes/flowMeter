@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-#This class was created to store the messurement data of hidrometer system, all other classes and threads goes take hidrometer information from this class.
+#This class was created to store the messurement data of hydrometer system, all other classes and threads goes take hydrometer information from this class.
 
 from threading import Semaphore
 
-class HidroMeter():
+class HydroMeter():
     def __init__(self, spinFactor=4.5, minFlow=1, maxFlow=30):
         self.spinFactor = spinFactor
         self.minFlow =  minFlow
@@ -52,6 +52,6 @@ class HidroMeter():
         self._semaphore.release()
 
 if __name__ == "__main__":
-    myMeter = HidroMeter()
+    myMeter = HydroMeter()
     print myMeter
 
