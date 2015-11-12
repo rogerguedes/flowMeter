@@ -80,6 +80,7 @@ class App extends CI_Controller {
                         exit();
                 }else{
                     $viewName = 'html/view_login';
+                    $this->apphelper->loadLoginInputs($data);
                 }
             }else{
                 $data["blockedTime"] = $this->model_security->getBlockedTime();
