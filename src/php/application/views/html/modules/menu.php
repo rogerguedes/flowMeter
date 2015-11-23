@@ -8,10 +8,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand navbarLogoAnchor" href="<?php echo $baseUrl;?>"><img src="<?php echo $baseUrl;?>static/imgs/logo.png" /></a>
+                <a class="navbar-brand navbarLogoAnchor" href="<?php echo $appFullPath;?>"><img src="<?php echo $appFullPath;?>static/imgs/water-drop-128.png" /></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                    <li><a href="<?php echo $appFullPath;?>metermodels">Brokers</a></li>
                     <li class="dropdown">
                         <a class="capitalize" href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo($sessionUser->getName());?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
