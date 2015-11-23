@@ -25,4 +25,4 @@
     var backEnd = {appFullPath: "<?php echo $appFullPath;?>"}
 </script>
 <!--Favicons-->
-<link rel="shortcut icon" href="<?php echo $appFullPath;?>static/imgs/water-drop-128.png" type="image/x-ic">
+<link rel="shortcut icon" href="<?php echo $baseUrl;?>static/imgs/water-drop-128.png" type="image/x-ic">
