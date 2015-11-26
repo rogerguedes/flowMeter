@@ -1,83 +1,79 @@
--- phpMyAdmin SQL Dump
--- version 4.4.14
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 12, 2015 at 06:36 AM
--- Server version: 5.6.26
--- PHP Version: 5.5.28
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+CREATE SCHEMA IF NOT EXISTS `flowMeter` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `flowMeter` ;
+
+-- -----------------------------------------------------
+-- Table `flowMeter`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `flowMeter`.`users` ;
+
+CREATE  TABLE IF NOT EXISTS `flowMeter`.`users` (
+  `id_users` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(255) NULL DEFAULT NULL ,
+  `email` VARCHAR(255) NOT NULL ,
+  `password` VARCHAR(255) NOT NULL ,
+  PRIMARY KEY (`id_users`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- -----------------------------------------------------
+-- Table `flowMeter`.`login_attempts`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `flowMeter`.`login_attempts` ;
 
---
--- Database: `flowMeter`
---
--- --------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `flowMeter`.`login_attempts` (
+  `ip` VARCHAR(45) NOT NULL ,
+  `first_attempt` TIMESTAMP NOT NULL ,
+  `tries` SMALLINT NOT NULL ,
+  PRIMARY KEY (`ip`) )
+ENGINE = InnoDB;
 
---
--- Table structure for table `login_attempts`
---
 
-CREATE TABLE IF NOT EXISTS `login_attempts` (
-  `ip` varchar(45) NOT NULL,
-  `first_attempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `tries` smallint(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------
+-- Table `flowMeter`.`readings`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `flowMeter`.`readings` ;
 
--- --------------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `flowMeter`.`readings` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `flow` INT NOT NULL ,
+  `volume` INT NOT NULL ,
+  `date` TIMESTAMP NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
 
---
--- Table structure for table `users`
---
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id_users` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------
+-- Table `flowMeter`.`broker_entries`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `flowMeter`.`broker_entries` ;
 
---
--- Dumping data for table `users`
---
+CREATE  TABLE IF NOT EXISTS `flowMeter`.`broker_entries` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `ip_address` VARCHAR(45) NOT NULL ,
+  `port` INT NOT NULL ,
+  `topic` VARCHAR(256) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
 
-INSERT INTO `users` (`id_users`, `name`, `email`, `password`) VALUES
-(1, 'Rogers Guedes', 'rogerguedes.ft@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI='),
-(2, 'Vinícius Carvalho', 'viniciuscarvalho789@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI='),
-(3, 'Nídia S. Campos', 'nidiascampos@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `login_attempts`
---
-ALTER TABLE `login_attempts`
-  ADD PRIMARY KEY (`ip`);
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_users`);
+-- -----------------------------------------------------
+-- Data for table `flowMeter`.`users`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `flowMeter`;
+INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (1, 'Rogers Guedes', 'rogerguedes.ft@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
+INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (2, 'Vinícius Carvalho', 'viniciuscarvalho789@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
+INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (3, 'Nídia S. Campos', 'nidiascampos@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+COMMIT;
