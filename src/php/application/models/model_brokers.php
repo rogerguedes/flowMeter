@@ -1,6 +1,7 @@
-
 <?php
-class Brokers_Model extends CI_Model{
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Model_Brokers extends CI_Model{
     function __construct(){
         parent::__construct();
         $this->load->database();

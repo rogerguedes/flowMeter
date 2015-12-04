@@ -37,16 +37,17 @@ class Brokers extends CI_Controller {
         if($isLogged){
             $validationRules = array(
                 array('field' => 'ip_address', 'label' => 'Endereço IP', 'rules' => 'required'),
-                array('field' => 'port', 'label' => 'Nome', 'rules' => 'required|is_natural_no_zero'),
-                array('field' => 'topic', 'label' => 'Descrição', 'rules' => 'required')
+                array('field' => 'port', 'label' => 'Porta', 'rules' => 'required|is_natural_no_zero'),
+                array('field' => 'topic', 'label' => 'Tópico', 'rules' => 'required')
             );
             $this->form_validation->set_rules( $validationRules );
             $this->form_validation->set_message('required', 'O campo %s não pode ser vazio.');
+            $this->form_validation->set_message('is_natural_no_zero', 'O campo %s deve ser um número natural não nulo.');
             if( $this->form_validation->run() ){
                 $data["status"] = true;
                 $newBroker = new Broker(null, $this->input->post('ip_address'), $this->input->post('port'), $this->input->post('topic'));
-                $this->load->model('brokers_model');
-                $data["object"] = $this->brokers_model->create($newBroker);
+                $this->load->model('model_brokers');
+                $data["object"] = $this->model_brokers->create($newBroker);
             }else{
                 $data["status"] = false;
                 foreach($validationRules as $field){
@@ -101,18 +102,18 @@ class Brokers extends CI_Controller {
         $data['errors'] = array();
         
         if($isLogged){
-            $this->load->model('brokers_model');
+            $this->load->model('model_brokers');
             if($id){//if there's an id
                 if(preg_match("/^\d+$/i",$id, $matches)){//this id must to be only numbers
                     $data['status'] = true;
-                    $data["object"] = $this->brokers_model->read( new Broker($id, null, null, null) );
+                    $data["object"] = $this->model_brokers->read( new Broker($id, null, null, null) );
                 }else{
                     $data['status'] = false;
                     $data['errors'][] = $this->apphelper->getErrMsgs()['onlyNumbers'];
                 }
             }else{
                 $data['status'] = true;
-                $data["object"] = $this->brokers_model->read();
+                $data["object"] = $this->model_brokers->read();
             }
         }else{
             $data['status'] = false;
@@ -182,8 +183,8 @@ class Brokers extends CI_Controller {
                 }
                 
                 $data['status'] = true;
-                $this->load->model('brokers_model');
-                $data["object"] = $this->brokers_model->update( $broker );
+                $this->load->model('model_brokers');
+                $data["object"] = $this->model_brokers->update( $broker );
             }else{
                 $data["status"] = false;
                 foreach($validationRules as $field){
@@ -247,8 +248,8 @@ class Brokers extends CI_Controller {
             if( $this->form_validation->run() ){
                 $broker= new Broker($this->input->post('id'), null, null, null);
                 $data["status"] = true;
-                $this->load->model('brokers_model');
-                $data["object"] = $this->brokers_model->delete( $broker );
+                $this->load->model('model_brokers');
+                $data["object"] = $this->model_brokers->delete( $broker );
             }else{
                 $data["status"] = false;
                 foreach($validationRules as $field){

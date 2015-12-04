@@ -12,7 +12,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?php echo $appFullPath;?>metermodels">Brokers</a></li>
+                    <li><a href="<?php echo $appFullPath;?>brokers">Brokers</a></li>
                     <li class="dropdown">
                         <a class="capitalize" href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo($sessionUser->getName());?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
