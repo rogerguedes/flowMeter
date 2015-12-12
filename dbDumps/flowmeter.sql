@@ -41,8 +41,8 @@ DROP TABLE IF EXISTS `flowMeter`.`readings` ;
 
 CREATE  TABLE IF NOT EXISTS `flowMeter`.`readings` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `flow` INT NOT NULL ,
-  `volume` INT NOT NULL ,
+  `flow` DOUBLE NOT NULL ,
+  `volume` DOUBLE NOT NULL ,
   `date` TIMESTAMP NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -62,6 +62,18 @@ CREATE  TABLE IF NOT EXISTS `flowMeter`.`broker_entries` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `flowMeter`.`settings`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `flowMeter`.`settings` ;
+
+CREATE  TABLE IF NOT EXISTS `flowMeter`.`settings` (
+  `key` VARCHAR(16) NOT NULL ,
+  `value` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`key`) )
+ENGINE = InnoDB;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -75,5 +87,23 @@ USE `flowMeter`;
 INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (1, 'Rogers Guedes', 'rogerguedes.ft@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
 INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (2, 'Vinícius Carvalho', 'viniciuscarvalho789@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
 INSERT INTO `flowMeter`.`users` (`id_users`, `name`, `email`, `password`) VALUES (3, 'Nídia S. Campos', 'nidiascampos@gmail.com', 'xTJVMXuxFwfQ9hRpazzm8iHQ4vI=');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `flowMeter`.`readings`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `flowMeter`;
+INSERT INTO `flowMeter`.`readings` (`id`, `flow`, `volume`, `date`) VALUES (NULL, 1, 0, '2015-12-11 18:23:58');
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table `flowMeter`.`settings`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `flowMeter`;
+INSERT INTO `flowMeter`.`settings` (`key`, `value`) VALUES ('location', '');
 
 COMMIT;
